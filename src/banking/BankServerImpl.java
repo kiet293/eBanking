@@ -99,16 +99,16 @@ public class BankServerImpl extends UnicastRemoteObject implements BankInterface
         accounts.put(fromAcc, fromBalance - amount);
         accounts.put(toAcc, accounts.get(toAcc) + amount);
 
-//        // Lưu lịch sử
-//        addHistory(fromAcc,
-//                "Chuyển tiền: -" + String.format("%,.0f", amount) + " VND tới " + toAcc +
-//                        " | Nội dung: " + (content.isEmpty() ? "(Không có)" : content) +
-//                        " | Thời gian: " + java.time.LocalDateTime.now());
-//
-//        addHistory(toAcc,
-//                "Nhận tiền: +" + String.format("%,.0f", amount) + " VND từ " + fromAcc +
-//                        " | Nội dung: " + (content.isEmpty() ? "(Không có)" : content) +
-//                        " | Thời gian: " + java.time.LocalDateTime.now());
+        // Lưu lịch sử
+        addHistory(fromAcc,
+                "Chuyển tiền: -" + String.format("%,.0f", amount) + " VND tới " + toAcc +
+                        " | Nội dung: " + (content.isEmpty() ? "(Không có)" : content) +
+                        " | Thời gian: " + java.time.LocalDateTime.now());
+
+        addHistory(toAcc,
+                "Nhận tiền: +" + String.format("%,.0f", amount) + " VND từ " + fromAcc +
+                        " | Nội dung: " + (content.isEmpty() ? "(Không có)" : content) +
+                        " | Thời gian: " + java.time.LocalDateTime.now());
 
         // Callback người nhận
         if (callbacks.containsKey(toAcc)) {
